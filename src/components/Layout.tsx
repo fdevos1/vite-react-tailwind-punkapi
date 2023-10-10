@@ -9,9 +9,9 @@ function Layout() {
       <div className="flex flex-col min-w-full min-h-full">
         <Header />
 
-        <div className="content">
+        <main className="content">
           <Outlet />
-        </div>
+        </main>
         <Footer />
       </div>
     </>

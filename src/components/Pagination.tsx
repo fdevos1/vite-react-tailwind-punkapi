@@ -12,8 +12,6 @@ function Pagination({
     pages.push(i);
   }
 
-  console.log(pages);
-
   return (
     <nav className="flex gap-2">
       <button onClick={() => prevPage()} className="hover:text-emerald-200">

@@ -2,9 +2,14 @@ import { useContext, useState } from "react";
 import { BeersContext } from "../contexts/beersContext";
 import BeerBox from "../components/BeerBox";
 import Pagination from "../components/Pagination";
+import { IBeer } from "../interfaces/beerInterface";
+
+interface IBeerContext {
+  beersList: IBeer[];
+}
 
 function Home() {
-  const { beersList } = useContext(BeersContext);
+  const { beersList } = useContext(BeersContext) as IBeerContext;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [beersPerPage, setBeersPerPage] = useState(12);
@@ -31,9 +36,9 @@ function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center p-8">
+    <div className="flex flex-col items-center p-8">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-items-center p-4 gap-4">
-        {currentBeers.map((beer) => {
+        {currentBeers.map((beer: IBeer) => {
           return (
             <BeerBox
               key={beer.id}
@@ -42,6 +47,7 @@ function Home() {
               tagline={beer.tagline}
               description={beer.description}
               first_brewed={beer.first_brewed}
+              beer_id={beer.id}
             />
           );
         })}
@@ -55,7 +61,7 @@ function Home() {
         nextPage={handleNextPage}
         currentPage={currentPage}
       />
-    </main>
+    </div>
   );
 }
 

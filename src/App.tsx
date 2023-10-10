@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import BeersProvider from "./contexts/beersContext";
 import Layout from "./components/Layout";
+import BeerInfo from "./pages/BeerInfo";
 
 function App() {
   return (
@@ -16,6 +17,15 @@ function App() {
                 element={
                   <>
                     <Home />
+                  </>
+                }
+              />
+
+              <Route
+                path="/informacoes_cerveja/:id"
+                element={
+                  <>
+                    <BeerInfo />
                   </>
                 }
               />

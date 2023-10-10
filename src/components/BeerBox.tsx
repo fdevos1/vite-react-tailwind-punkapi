@@ -1,4 +1,22 @@
-function BeerBox({ imgUrl, name, tagline, description, first_brewed }: any) {
+import { useNavigate } from "react-router-dom";
+
+function BeerBox({
+  imgUrl,
+  name,
+  tagline,
+  description,
+  first_brewed,
+  beer_id,
+}: {
+  imgUrl: string;
+  name: string;
+  tagline: string;
+  description: string;
+  first_brewed: string;
+  beer_id: number;
+}) {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col w-full h-[600px] border p-4 bg-gray-100 rounded">
       <div className="flex justify-center">
@@ -15,7 +33,10 @@ function BeerBox({ imgUrl, name, tagline, description, first_brewed }: any) {
         </span>
         <span className="font-bold text-gray-700">{first_brewed}</span>
 
-        <button className="rounded bg-emerald-300 text-neutral-100 h-10">
+        <button
+          className="rounded bg-emerald-300 text-neutral-100 h-10"
+          onClick={() => navigate(`/informacoes_cerveja/${beer_id}`)}
+        >
           Ver todas informações
         </button>
       </div>
