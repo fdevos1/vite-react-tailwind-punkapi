@@ -5,6 +5,7 @@ function Pagination({
   selectPage,
   nextPage,
   currentPage,
+  handleBeersPerPage,
 }: {
   totalBeers: number;
   beersPerPage: number;
@@ -12,6 +13,7 @@ function Pagination({
   selectPage: (page: number) => void;
   nextPage: () => void;
   currentPage: number;
+  handleBeersPerPage: (newState: number) => void;
 }) {
   const pages = [];
 
@@ -42,6 +44,11 @@ function Pagination({
       <button className="hover:text-emerald-200" onClick={() => nextPage()}>
         Próximo
       </button>
+
+      <button
+        className="hidden"
+        onClick={() => handleBeersPerPage(12)}
+      ></button>
     </nav>
   );
 }
