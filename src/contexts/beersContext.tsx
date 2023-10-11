@@ -23,8 +23,6 @@ export const BeersProvider = ({ children }: { children: JSX.Element }) => {
 
   const handleOpenModal = () => {
     setModalOpen(true);
-
-    console.log(modalOpen);
   };
 
   const handleCloseModal = () => {
@@ -46,6 +44,7 @@ export const BeersProvider = ({ children }: { children: JSX.Element }) => {
         modalOpen,
         handleOpenModal,
         handleCloseModal,
+        requestRandomBeer,
       }}
     >
       {children}

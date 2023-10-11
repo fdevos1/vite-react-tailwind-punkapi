@@ -1,45 +1,78 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useContext } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import BeersProvider from "./contexts/beersContext";
 import Layout from "./components/Layout";
 import ErrorFallback from "./components/ErrorFallback";
 import BeerInfoSkeleton from "./components/skeletons/BeerInfoSkeleton";
+import Login from "./pages/Login";
+import { AuthContext, AuthProvider } from "./contexts/authContext";
 
 const BeerInfo = lazy(() => import("./pages/BeerInfo"));
 
 function App() {
-  return (
-    <div className="app">
-      <BrowserRouter>
-        <BeersProvider>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <Home />
-                  </>
-                }
-              />
+  const Private = ({ children }: { children: React.ReactNode }) => {
+    const { authenticated, loading } = useContext(AuthContext) as {
+      authenticated: boolean;
+      loading: boolean;
+    };
 
-              <Route
-                path="/informacoes_cerveja/:id"
-                element={
-                  <ErrorBoundary FallbackComponent={ErrorFallback}>
-                    <Suspense fallback={<BeerInfoSkeleton />}>
-                      <BeerInfo />
-                    </Suspense>
-                  </ErrorBoundary>
-                }
-              />
-            </Route>
-          </Routes>
-        </BeersProvider>
+    if (loading) {
+      return <div className="loading">Carregando...</div>;
+    }
+
+    if (!authenticated) {
+      return <Navigate to="/login" />;
+    }
+
+    return children;
+  };
+
+  return (
+    <div className="app w-screen h-screen">
+      <BrowserRouter>
+        <AuthProvider>
+          <BeersProvider>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route
+                  path="/login"
+                  element={
+                    <>
+                      <Login />
+                    </>
+                  }
+                />
+
+                <Route
+                  path="/home"
+                  element={
+                    <Private>
+                      <Home />
+                    </Private>
+                  }
+                />
+
+                <Route
+                  path="/beer_information/:id"
+                  element={
+                    <Private>
+                      <ErrorBoundary FallbackComponent={ErrorFallback}>
+                        <Suspense fallback={<BeerInfoSkeleton />}>
+                          <BeerInfo />
+                        </Suspense>
+                      </ErrorBoundary>
+                    </Private>
+                  }
+                />
+              </Route>
+            </Routes>
+          </BeersProvider>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

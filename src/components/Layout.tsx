@@ -1,18 +1,35 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import Footer from "./Footer";
 import Header from "./Header";
 
 function Layout() {
+  const pathname = useLocation().pathname;
+
   return (
     <>
-      <div className="flex flex-col min-w-full min-h-full justify-between">
-        <Header />
-
+      <div
+        className={`flex flex-col min-w-full min-h-full ${
+          pathname === "/login" ? "justify-center" : "justify-between"
+        } `}
+      >
+        <header
+          className={`${
+            pathname === "/login" ? "hidden" : "flex"
+          }  w-full h-auto justify-between items-center px-8 my-2`}
+        >
+          <Header />
+        </header>
         <main className="content">
           <Outlet />
         </main>
-        <Footer />
+        <footer
+          className={`
+          ${pathname === "/login" ? "hidden" : "flex"}
+           flex-col items-center justify-center w-full h-auto min-h-[70px] p-4 text-center"`}
+        >
+          <Footer />
+        </footer>
       </div>
     </>
   );

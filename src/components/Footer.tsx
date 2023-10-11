@@ -14,7 +14,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="flex flex-col items-center justify-center w-full h-auto min-h-[70px] p-4 text-center">
+    <>
       <div className="w-full max-w-[280px] mb-[10px] mx-auto text-slate-200">
         <ul className="flex justify-around items-center">
           {socialMedias.map(
@@ -37,7 +37,7 @@ function Footer() {
       <div className="text-emerald-200 font-mono text-[10px] leading-none">
         <span>Criado por Felipe Devos</span>
       </div>
-    </footer>
+    </>
   );
 }
 

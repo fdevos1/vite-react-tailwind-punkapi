@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({
+const loginApi = axios.create({
   baseURL: "http://localhost:4000",
   headers: {
     "Access-Control-Allow-Origin": "*",
@@ -8,4 +8,4 @@ const api = axios.create({
   },
 });
 
-export { api };
+export { loginApi };

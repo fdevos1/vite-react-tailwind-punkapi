@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 function BeerBox({
   imgUrl,
   name,
@@ -7,6 +5,8 @@ function BeerBox({
   description,
   first_brewed,
   beer_id,
+  newBeer,
+  isLogin,
 }: {
   imgUrl: string;
   name: string;
@@ -14,9 +14,9 @@ function BeerBox({
   description: string;
   first_brewed: string;
   beer_id: number;
+  newBeer: () => void;
+  isLogin: boolean;
 }) {
-  const navigate = useNavigate();
-
   return (
     <div className="flex flex-col w-full h-[600px] border p-4 bg-gray-100 rounded">
       <div className="flex justify-center">
@@ -33,12 +33,21 @@ function BeerBox({
         </span>
         <span className="font-bold text-gray-700">{first_brewed}</span>
 
-        <a
-          className="flex justify-center items-center rounded bg-emerald-300 text-neutral-100 h-10"
-          href={`/informacoes_cerveja/${beer_id}`}
-        >
-          Ver todas informações
-        </a>
+        {isLogin ? (
+          <button
+            onClick={newBeer}
+            className="text-lg font-light bg-emerald-200 text-white rounded p-2 hover:bg-emerald-300"
+          >
+            New beer
+          </button>
+        ) : (
+          <a
+            className="flex justify-center items-center rounded bg-emerald-300 text-neutral-100 h-10"
+            href={`/informacoes_cerveja/${beer_id}`}
+          >
+            See more information
+          </a>
+        )}
       </div>
     </div>
   );

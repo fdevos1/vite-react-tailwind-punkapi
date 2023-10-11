@@ -14,7 +14,7 @@ function Header() {
   const { handleOpenModal } = useContext(BeersContext) as IBeerContext;
 
   return (
-    <header className="flex w-full justify-between items-center px-8 my-2">
+    <>
       <div>
         <Icon name="Logo" />
       </div>
@@ -42,7 +42,7 @@ function Header() {
         <SearchInput />
         <Dropdown />
       </div>
-    </header>
+    </>
   );
 }
 
