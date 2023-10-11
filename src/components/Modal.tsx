@@ -1,3 +1,5 @@
+import Icon from "./icons/icon";
+
 function Modal({
   open,
   onClose,
@@ -16,7 +18,9 @@ function Modal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-white rounded-xl shadow p-6 transition-all ${
+        className={`
+        max-w-[500px]
+        bg-white rounded-xl shadow p-10 transition-all ${
           open ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >
@@ -24,7 +28,7 @@ function Modal({
           className="absolute top-2 right-2 p-1 rounded-lg text-gray-700 bg-white hover:bg-gray-50 hover:text-gray-800"
           onClick={onClose}
         >
-          X
+          <Icon name="Close" />
         </button>
 
         {children}

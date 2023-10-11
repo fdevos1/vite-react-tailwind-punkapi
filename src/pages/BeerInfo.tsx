@@ -5,6 +5,8 @@ import { IBeer } from "../interfaces/beerInterface";
 import BeerInfoText from "../components/BeerInfoText";
 import BeerInfoFlexBox from "../components/BeerInfoFlexBox";
 import { BeersContext } from "../contexts/beersContext";
+import { getSingleBeer } from "../services/getSingleBeer";
+import DiscoverNewBeer from "../components/DiscoverNewBeer";
 
 interface IBeerContext {
   beersList: IBeer[];
@@ -18,9 +20,13 @@ function BeerInfo() {
   const { beersList } = useContext(BeersContext) as IBeerContext;
 
   const getBeer = async () => {
-    if (id) {
+    if (id && parseInt(id) <= 80) {
       const getBeerInfo = beersList.filter((beer) => parseInt(id) === beer.id);
       setBeerInfo(getBeerInfo);
+    } else {
+      const requestBeerInfo = await getSingleBeer(id!);
+
+      setBeerInfo(requestBeerInfo);
     }
   };
 
@@ -61,7 +67,7 @@ function BeerInfo() {
 
                   <BeerInfoText text={`First brewed: ${beer.first_brewed}`} />
 
-                  <BeerInfoText text={`Brewer tips: {beer.brewers_tips}`} />
+                  <BeerInfoText text={`Brewer tips: ${beer.brewers_tips}`} />
 
                   <BeerInfoText
                     text={`European Brewery Convention: ${beer.ebc}`}
@@ -76,7 +82,7 @@ function BeerInfo() {
                   />
 
                   <BeerInfoText
-                    text={`Boil volume: ${beer.boil_volume.value}{" "}
+                    text={`Boil volume: ${beer.boil_volume.value}
                     ${beer.boil_volume.unit}`}
                   />
 
@@ -157,6 +163,8 @@ function BeerInfo() {
             </div>
           </div>
         ))}
+
+      <DiscoverNewBeer />
     </div>
   );
 }

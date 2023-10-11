@@ -33,12 +33,12 @@ function BeerBox({
         </span>
         <span className="font-bold text-gray-700">{first_brewed}</span>
 
-        <button
-          className="rounded bg-emerald-300 text-neutral-100 h-10"
-          onClick={() => navigate(`/informacoes_cerveja/${beer_id}`)}
+        <a
+          className="flex justify-center items-center rounded bg-emerald-300 text-neutral-100 h-10"
+          href={`/informacoes_cerveja/${beer_id}`}
         >
           Ver todas informações
-        </button>
+        </a>
       </div>
     </div>
   );

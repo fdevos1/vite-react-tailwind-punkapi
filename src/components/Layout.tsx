@@ -6,7 +6,7 @@ import Header from "./Header";
 function Layout() {
   return (
     <>
-      <div className="flex flex-col min-w-full min-h-full">
+      <div className="flex flex-col min-w-full min-h-full justify-between">
         <Header />
 
         <main className="content">

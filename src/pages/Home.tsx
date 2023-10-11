@@ -1,20 +1,19 @@
 import { useContext, useState } from "react";
+
 import { BeersContext } from "../contexts/beersContext";
+
 import BeerBox from "../components/BeerBox";
 import Pagination from "../components/Pagination";
+
 import { IBeer } from "../interfaces/beerInterface";
-import Modal from "../components/Modal";
+import DiscoverNewBeer from "../components/DiscoverNewBeer";
 
 interface IBeerContext {
   beersList: IBeer[];
-  modalOpen: boolean;
-  handleCloseModal: () => void;
 }
 
 function Home() {
-  const { beersList, modalOpen, handleCloseModal } = useContext(
-    BeersContext
-  ) as IBeerContext;
+  const { beersList } = useContext(BeersContext) as IBeerContext;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [beersPerPage, setBeersPerPage] = useState(12);
@@ -67,9 +66,7 @@ function Home() {
         currentPage={currentPage}
       />
 
-      <Modal open={modalOpen} onClose={handleCloseModal}>
-        <p>Hello World</p>
-      </Modal>
+      <DiscoverNewBeer />
     </div>
   );
 }
