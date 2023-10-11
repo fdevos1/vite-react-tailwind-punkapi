@@ -5,6 +5,13 @@ function Pagination({
   selectPage,
   nextPage,
   currentPage,
+}: {
+  totalBeers: number;
+  beersPerPage: number;
+  prevPage: () => void;
+  selectPage: (page: number) => void;
+  nextPage: () => void;
+  currentPage: number;
 }) {
   const pages = [];
 
