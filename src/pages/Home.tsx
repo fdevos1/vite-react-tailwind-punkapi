@@ -22,6 +22,8 @@ function Home() {
 
   const currentBeers = beersList.slice(firstIndex, lastIndex);
 
+  setBeersPerPage(12);
+
   const handlePrevPage = () => {
     if (currentPage !== firstIndex) {
       setCurrentPage(currentPage - 1);

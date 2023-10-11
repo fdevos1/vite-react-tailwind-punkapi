@@ -6,7 +6,6 @@ import BeerInfoText from "../components/BeerInfoText";
 import BeerInfoFlexBox from "../components/BeerInfoFlexBox";
 import { BeersContext } from "../contexts/beersContext";
 import { getSingleBeer } from "../services/getSingleBeer";
-import DiscoverNewBeer from "../components/DiscoverNewBeer";
 
 interface IBeerContext {
   beersList: IBeer[];
