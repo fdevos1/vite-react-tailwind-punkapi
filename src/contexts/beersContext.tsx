@@ -5,6 +5,15 @@ export const BeersContext = createContext({});
 
 export const BeersProvider = ({ children }: { children: JSX.Element }) => {
   const [beersList, setBeersList] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   const requestBeers = async () => {
     const fetchData = await getBeers();
@@ -17,7 +26,9 @@ export const BeersProvider = ({ children }: { children: JSX.Element }) => {
   }, []);
 
   return (
-    <BeersContext.Provider value={{ beersList }}>
+    <BeersContext.Provider
+      value={{ beersList, modalOpen, handleOpenModal, handleCloseModal }}
+    >
       {children}
     </BeersContext.Provider>
   );

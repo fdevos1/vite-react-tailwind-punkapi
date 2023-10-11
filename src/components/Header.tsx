@@ -1,8 +1,18 @@
+import { useContext } from "react";
+
+import { BeersContext } from "../contexts/beersContext";
+
 import Dropdown from "./Dropdown";
 import SearchInput from "./SearchInput";
 import Icon from "./icons/icon";
 
+interface IBeerContext {
+  handleOpenModal: () => void;
+}
+
 function Header() {
+  const { handleOpenModal } = useContext(BeersContext) as IBeerContext;
+
   return (
     <header className="flex w-full justify-between items-center px-8 my-2">
       <div>
@@ -13,7 +23,12 @@ function Header() {
         <a className="cursor-pointer hover:text-emerald-200" href={"/"}>
           Home
         </a>
-        <a>Discover a new beer</a>
+        <a
+          className="cursor-pointer hover:text-emerald-200"
+          onClick={handleOpenModal}
+        >
+          Discover a new beer
+        </a>
         <a
           className="cursor-pointer hover:text-emerald-200"
           href={"https://punkapi.com/documentation/v2"}
