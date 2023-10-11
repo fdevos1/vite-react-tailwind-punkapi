@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const loginApi = axios.create({
-  baseURL: "https://stormy-wasp-sheath-dress.cyclic.app",
+  baseURL: "https://backend-desafio-garupa.onrender.com/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
