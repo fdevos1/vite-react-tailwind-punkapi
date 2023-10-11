@@ -42,12 +42,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.setItem("user_email", JSON.stringify(user.email));
 
       return response.data;
-    } catch (err: AxiosError) {
-      setError({
-        message: err.response.data.message,
-        status: err.response.status,
-      });
-      return err;
+    } catch (error: any) {
+      if (error as AxiosError) {
+        setError({
+          message: error.response.data.message,
+          status: error.response.status,
+        });
+      }
+
+      return error;
     }
   };
 

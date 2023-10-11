@@ -10,7 +10,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const token = localStorage.getItem("token");
 
   const requestUser = async () => {
-    if (id) {
+    if (id && token) {
       const user = await getUser(id, token);
 
       setUser(user);
