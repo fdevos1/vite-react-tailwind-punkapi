@@ -10,6 +10,7 @@ import ErrorFallback from "./components/ErrorFallback";
 import BeerInfoSkeleton from "./components/skeletons/BeerInfoSkeleton";
 import Login from "./pages/Login";
 import { AuthContext, AuthProvider } from "./contexts/authContext";
+import UserProvider from "./contexts/userContext";
 
 const BeerInfo = lazy(() => import("./pages/BeerInfo"));
 
@@ -36,41 +37,43 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <BeersProvider>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route path="/" element={<Navigate to="/home" />} />
-                <Route
-                  path="/login"
-                  element={
-                    <>
-                      <Login />
-                    </>
-                  }
-                />
+            <UserProvider>
+              <Routes>
+                <Route element={<Layout />}>
+                  <Route path="/" element={<Navigate to="/home" />} />
+                  <Route
+                    path="/login"
+                    element={
+                      <>
+                        <Login />
+                      </>
+                    }
+                  />
 
-                <Route
-                  path="/home"
-                  element={
-                    <Private>
-                      <Home />
-                    </Private>
-                  }
-                />
+                  <Route
+                    path="/home"
+                    element={
+                      <Private>
+                        <Home />
+                      </Private>
+                    }
+                  />
 
-                <Route
-                  path="/beer_information/:id"
-                  element={
-                    <Private>
-                      <ErrorBoundary FallbackComponent={ErrorFallback}>
-                        <Suspense fallback={<BeerInfoSkeleton />}>
-                          <BeerInfo />
-                        </Suspense>
-                      </ErrorBoundary>
-                    </Private>
-                  }
-                />
-              </Route>
-            </Routes>
+                  <Route
+                    path="/beer_information/:id"
+                    element={
+                      <Private>
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <Suspense fallback={<BeerInfoSkeleton />}>
+                            <BeerInfo />
+                          </Suspense>
+                        </ErrorBoundary>
+                      </Private>
+                    }
+                  />
+                </Route>
+              </Routes>
+            </UserProvider>
           </BeersProvider>
         </AuthProvider>
       </BrowserRouter>

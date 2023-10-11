@@ -7,7 +7,9 @@ export const BeersContext = createContext({});
 export const BeersProvider = ({ children }: { children: JSX.Element }) => {
   const [beersList, setBeersList] = useState([]);
   const [randomBeer, setRandomBeer] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [beerModalOpen, setBeerModalOpen] = useState(false);
+  const [accountSettingsModalOpen, setAccountSettingsModalOpen] =
+    useState(false);
 
   const requestBeers = async () => {
     const fetchData = await getBeers();
@@ -22,13 +24,21 @@ export const BeersProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   const handleOpenModal = () => {
-    setModalOpen(true);
+    setBeerModalOpen(true);
   };
 
   const handleCloseModal = () => {
     requestRandomBeer();
 
-    setModalOpen(false);
+    setBeerModalOpen(false);
+  };
+
+  const handleSettingsOpenModal = () => {
+    setAccountSettingsModalOpen(true);
+  };
+
+  const handleSettingsCloseModal = () => {
+    setAccountSettingsModalOpen(false);
   };
 
   useEffect(() => {
@@ -41,9 +51,12 @@ export const BeersProvider = ({ children }: { children: JSX.Element }) => {
       value={{
         beersList,
         randomBeer,
-        modalOpen,
+        beerModalOpen,
         handleOpenModal,
         handleCloseModal,
+        handleSettingsOpenModal,
+        handleSettingsCloseModal,
+        accountSettingsModalOpen,
         requestRandomBeer,
       }}
     >

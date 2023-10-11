@@ -6,7 +6,6 @@ import BeerBox from "../components/BeerBox";
 import Pagination from "../components/Pagination";
 
 import { IBeer } from "../interfaces/beerInterface";
-import DiscoverNewBeer from "../components/DiscoverNewBeer";
 
 interface IBeerContext {
   beersList: IBeer[];
@@ -65,8 +64,6 @@ function Home() {
         nextPage={handleNextPage}
         currentPage={currentPage}
       />
-
-      <DiscoverNewBeer />
     </div>
   );
 }

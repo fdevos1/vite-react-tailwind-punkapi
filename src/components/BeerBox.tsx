@@ -1,3 +1,14 @@
+interface IBeerBox {
+  imgUrl: string;
+  name: string;
+  tagline: string;
+  description: string;
+  first_brewed: string;
+  beer_id: number;
+  newBeer?: () => void;
+  isLogin?: boolean;
+}
+
 function BeerBox({
   imgUrl,
   name,
@@ -7,16 +18,7 @@ function BeerBox({
   beer_id,
   newBeer,
   isLogin,
-}: {
-  imgUrl: string;
-  name: string;
-  tagline: string;
-  description: string;
-  first_brewed: string;
-  beer_id: number;
-  newBeer: () => void;
-  isLogin: boolean;
-}) {
+}: IBeerBox) {
   return (
     <div className="flex flex-col w-full h-[600px] border p-4 bg-gray-100 rounded">
       <div className="flex justify-center">
@@ -43,7 +45,7 @@ function BeerBox({
         ) : (
           <a
             className="flex justify-center items-center rounded bg-emerald-300 text-neutral-100 h-10"
-            href={`/informacoes_cerveja/${beer_id}`}
+            href={`/beer_information/${beer_id}`}
           >
             See more information
           </a>

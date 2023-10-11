@@ -32,16 +32,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const { token, user } = response.data.token;
 
-      const { id } = user;
-
       navigate("/home");
 
-      setUser(id);
+      setUser(user.id);
 
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(id));
-
-      loginApi.defaults.headers.Authorization = `Bearer ${token}`;
+      localStorage.setItem("user_id", JSON.stringify(user.id));
+      localStorage.setItem("user_name", JSON.stringify(user.name));
+      localStorage.setItem("user_email", JSON.stringify(user.email));
 
       return response.data;
     } catch (err: AxiosError) {
@@ -55,9 +53,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signOut = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("user_email");
 
-    loginApi.defaults.headers.Authorization = null;
     setUser(null);
 
     navigate("/");

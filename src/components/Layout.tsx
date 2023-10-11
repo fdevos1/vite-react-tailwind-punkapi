@@ -2,6 +2,8 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import Footer from "./Footer";
 import Header from "./Header";
+import DiscoverNewBeer from "./DiscoverNewBeer";
+import AccountSettings from "./AccountSettings";
 
 function Layout() {
   const pathname = useLocation().pathname;
@@ -22,6 +24,10 @@ function Layout() {
         </header>
         <main className="content">
           <Outlet />
+
+          <DiscoverNewBeer />
+
+          <AccountSettings />
         </main>
         <footer
           className={`

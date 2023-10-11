@@ -163,8 +163,6 @@ function BeerInfo() {
             </div>
           </div>
         ))}
-
-      <DiscoverNewBeer />
     </div>
   );
 }

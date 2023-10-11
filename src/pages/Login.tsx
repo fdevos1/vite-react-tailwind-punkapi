@@ -121,7 +121,7 @@ function Login() {
           </button>
         </form>
       </div>
-      <div className="w-2/6 hidden lg:flex h-full flex flex-col justify-center items-center ">
+      <div className="w-2/6 hidden lg:flex h-full  flex-col justify-center items-center ">
         {randomBeer?.map((beer) => (
           <BeerBox
             key={beer.id}

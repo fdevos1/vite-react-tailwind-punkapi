@@ -1,17 +1,28 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
+import { useOutsideClick } from "../hooks/detectOutsideClick";
+import { BeersContext } from "../contexts/beersContext";
+
+interface IBeerContext {
+  handleSettingsOpenModal: () => void;
+}
 
 function Dropdown() {
   const [toggleDropDown, setToggleDropDown] = useState(false);
   const { signOut } = useContext(AuthContext) as { signOut: () => void };
+  const { handleSettingsOpenModal } = useContext(BeersContext) as IBeerContext;
+
+  const handleCloseDropDown = () => {
+    setToggleDropDown(false);
+  };
+
+  const ref = useOutsideClick(handleCloseDropDown);
 
   return (
     <>
       <div className="relative inline-block text-left">
         <button
-          type="button"
           className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
           onClick={() => setToggleDropDown(!toggleDropDown)}
@@ -33,39 +44,28 @@ function Dropdown() {
       </div>
 
       <div
+        ref={ref}
         className={`${
           toggleDropDown === false ? "hidden" : "block"
-        }  absolute right-8 2xl:right-6 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
-        role="menu"
-        aria-orientation="vertical"
-        aria-labelledby="menu-button"
-        tabIndex={-1}
+        }  fixed right-8 2xl:right-6 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
       >
         <div className="py-1">
-          <a
-            href="#"
-            className="text-gray-700 block px-4 py-2 text-sm"
-            role="menuitem"
-            tabIndex={-1}
-            id="menu-item-0"
+          <button
+            onClick={() => {
+              setToggleDropDown(false);
+              handleSettingsOpenModal();
+            }}
+            className="text-gray-700 block px-4 py-2 text-sm w-full text-start hover:text-emerald-200 hover:font-bold transition-all"
           >
             Account settings
-          </a>
-          <a
-            href="#"
-            className="text-gray-700 block px-4 py-2 text-sm"
-            role="menuitem"
-            tabIndex={-1}
-            id="menu-item-1"
-          >
-            Support
-          </a>
+          </button>
+
           <button
-            className="text-gray-700 block px-4 py-2 text-sm"
-            role="menuitem"
-            tabIndex={-1}
-            id="menu-item-2"
-            onClick={() => signOut()}
+            className="text-gray-700 block px-4 py-2 text-sm w-full text-start hover:text-emerald-200 hover:font-bold transition-all"
+            onClick={() => {
+              setToggleDropDown(false);
+              signOut();
+            }}
           >
             Sign Out
           </button>

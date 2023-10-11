@@ -9,17 +9,17 @@ import { IBeer } from "../interfaces/beerInterface";
 interface IBeerContext {
   beersList: IBeer[];
   randomBeer: IBeer[];
-  modalOpen: boolean;
+  beerModalOpen: boolean;
   handleCloseModal: () => void;
 }
 
 function DiscoverNewBeer() {
-  const { randomBeer, modalOpen, handleCloseModal } = useContext(
+  const { randomBeer, beerModalOpen, handleCloseModal } = useContext(
     BeersContext
   ) as IBeerContext;
 
   return (
-    <Modal open={modalOpen} onClose={handleCloseModal}>
+    <Modal open={beerModalOpen} onClose={handleCloseModal}>
       {randomBeer?.map((beer) => (
         <BeerBox
           key={beer.id}
