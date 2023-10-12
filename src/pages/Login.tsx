@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import Icon from "../components/icons/icon";
 import { IBeer } from "../interfaces/beerInterface";
 import BeerBox from "../components/BeerBox";
 import { AuthContext } from "../contexts/authContext";
+import CreateNewUser from "../components/CreateNewUser";
 
 interface IBeerContext {
   randomBeer: IBeer[];
@@ -21,11 +22,13 @@ interface IAuthContext {
 }
 
 function Login() {
+  const [openModal, setOpenModal] = useState(false);
+
   const loginValidation = yup.object({
     email: yup
       .string()
       .email("Insert a valid e-mail")
-      .required("Please insert your e-mail"),
+      .required("E-mail is required"),
     password: yup.string().required("Please insert your password"),
   });
 
@@ -53,6 +56,14 @@ function Login() {
 
   const handleRequestNewBeer = () => {
     requestRandomBeer();
+  };
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
 
   return (
@@ -111,7 +122,11 @@ function Login() {
             <button className="text-sm text-light text-gray-400 hover:text-emerald-300 hover:underline">
               Forgot password
             </button>
-            <button className="text-sm text-light text-gray-400 hover:text-emerald-300 hover:underline">
+            <button
+              type="button"
+              onClick={() => handleOpenModal()}
+              className="text-sm text-light text-gray-400 hover:text-emerald-300 hover:underline"
+            >
               Create a account
             </button>
           </div>
@@ -140,6 +155,8 @@ function Login() {
           Login to see more information
         </span>
       </div>
+
+      <CreateNewUser openModal={openModal} closeModal={handleCloseModal} />
     </div>
   );
 }
