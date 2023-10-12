@@ -10,6 +10,7 @@ import { IBeer } from "../interfaces/beerInterface";
 import BeerBox from "../components/BeerBox";
 import { AuthContext } from "../contexts/authContext";
 import CreateNewUser from "../components/CreateNewUser";
+import ForgotPassword from "../components/ForgotPassword";
 
 interface IBeerContext {
   randomBeer: IBeer[];
@@ -23,6 +24,7 @@ interface IAuthContext {
 
 function Login() {
   const [openModal, setOpenModal] = useState(false);
+  const [handleForgetPassword, setHandleForgetPassword] = useState(false);
 
   const loginValidation = yup.object({
     email: yup
@@ -64,6 +66,14 @@ function Login() {
 
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+
+  const handleOpenForgetPassword = () => {
+    setHandleForgetPassword(true);
+  };
+
+  const handleCloseForgetPassword = () => {
+    setHandleForgetPassword(false);
   };
 
   return (
@@ -119,7 +129,11 @@ function Login() {
             )}
           </div>
           <div className="flex justify-between ">
-            <button className="text-sm text-light text-gray-400 hover:text-emerald-300 hover:underline">
+            <button
+              type="button"
+              onClick={() => handleOpenForgetPassword()}
+              className="text-sm text-light text-gray-400 hover:text-emerald-300 hover:underline"
+            >
               Forgot password
             </button>
             <button
@@ -157,6 +171,10 @@ function Login() {
       </div>
 
       <CreateNewUser openModal={openModal} closeModal={handleCloseModal} />
+      <ForgotPassword
+        openModal={handleForgetPassword}
+        closeModal={handleCloseForgetPassword}
+      />
     </div>
   );
 }
