@@ -20,7 +20,7 @@ function Modal({
         onClick={(e) => e.stopPropagation()}
         className={`
         max-w-[500px]
-        bg-white rounded-xl shadow p-10 transition-all ${
+        bg-white rounded-xl shadow py-10 px-8 transition-all ${
           open ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >

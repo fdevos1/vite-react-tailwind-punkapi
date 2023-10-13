@@ -27,5 +27,3 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     </UserContext.Provider>
   );
 };
-
-export default UserProvider;

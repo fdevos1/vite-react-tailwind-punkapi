@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AxiosError } from "axios";
@@ -7,7 +7,7 @@ import { loginApi } from "../api/loginApi";
 
 export const AuthContext = createContext({});
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
@@ -29,6 +29,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         password,
       });
+
+      console.log(response);
 
       const { token, user } = response.data.token;
 

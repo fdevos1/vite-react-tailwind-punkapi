@@ -1,4 +1,10 @@
-const ErrorFallback = ({ error, resetErrorBoundary }: any) => {
+const ErrorFallback = ({
+  error,
+  resetErrorBoundary,
+}: {
+  error: { message: string };
+  resetErrorBoundary: () => void;
+}) => {
   return (
     <div className="error">
       <p>Something went wrong:</p>

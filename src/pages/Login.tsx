@@ -1,16 +1,18 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
-import { BeersContext } from "../contexts/beersContext";
+import { IBeer } from "../interfaces/beerInterface";
 
 import Icon from "../components/icons/icon";
-import { IBeer } from "../interfaces/beerInterface";
 import BeerBox from "../components/BeerBox";
-import { AuthContext } from "../contexts/authContext";
 import CreateNewUser from "../components/CreateNewUser";
 import ForgotPassword from "../components/ForgotPassword";
+
+import { AuthContext } from "../contexts/authContext";
+import { BeersContext } from "../contexts/beersContext";
+
+import { loginValidation } from "../utils/validation";
 
 interface IBeerContext {
   randomBeer: IBeer[];
@@ -25,14 +27,6 @@ interface IAuthContext {
 function Login() {
   const [openModal, setOpenModal] = useState(false);
   const [handleForgetPassword, setHandleForgetPassword] = useState(false);
-
-  const loginValidation = yup.object({
-    email: yup
-      .string()
-      .email("Insert a valid e-mail")
-      .required("E-mail is required"),
-    password: yup.string().required("Please insert your password"),
-  });
 
   const {
     register,

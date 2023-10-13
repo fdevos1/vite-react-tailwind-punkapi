@@ -64,5 +64,3 @@ export const BeersProvider = ({ children }: { children: JSX.Element }) => {
     </BeersContext.Provider>
   );
 };
-
-export default BeersProvider;

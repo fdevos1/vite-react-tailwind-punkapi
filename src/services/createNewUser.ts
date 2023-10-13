@@ -1,12 +1,7 @@
 import { loginApi } from "../api/loginApi";
+import { IUserData } from "../interfaces/userInterface";
 
-interface IData {
-  email: string;
-  name: string;
-  password: string;
-}
-
-export const createNewUser = async (data: IData) => {
+export const createNewUser = async (data: IUserData) => {
   try {
     const response = await loginApi.post("/user/create-user", data);
 

@@ -2,17 +2,13 @@ import { useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 import Modal from "./Modal";
+
+import { IUserData } from "../interfaces/userInterface";
 import { createNewUser } from "../services/createNewUser";
 import { AuthContext } from "../contexts/authContext";
-
-interface IData {
-  email: string;
-  name: string;
-  password: string;
-}
+import { createUserValidation } from "../utils/validation";
 
 interface IAuthContext {
   signIn: (a: string, b: string) => void;
@@ -26,18 +22,6 @@ function CreateNewUser({
   openModal: boolean;
   closeModal: () => void;
 }) {
-  const createUserValidation = yup.object({
-    name: yup.string().required("Name is required"),
-    email: yup
-      .string()
-      .email("Insert a valid e-mail")
-      .required("E-mail is required"),
-    password: yup
-      .string()
-      .required("Password is required")
-      .min(6, "Minimum 6 characters"),
-  });
-
   const {
     register,
     handleSubmit,
@@ -52,7 +36,7 @@ function CreateNewUser({
 
   const { signIn } = useContext(AuthContext) as IAuthContext;
 
-  const onSubmit = async (data: IData) => {
+  const onSubmit = async (data: IUserData) => {
     const createUser = await createNewUser(data);
 
     if (createUser.response && createUser.response.status === 409) {

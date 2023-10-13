@@ -1,12 +1,7 @@
 import { loginApi } from "../api/loginApi";
+import { IUserData } from "../interfaces/userInterface";
 
-interface IData {
-  email: string;
-  name: string;
-  password: string;
-}
-
-export const updateUser = async (data: Partial<IData>, token: string) => {
+export const updateUser = async (data: Partial<IUserData>, token: string) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
