@@ -1,6 +1,5 @@
 import { ReactNode, createContext, useState } from "react";
 import { recoveryPass } from "../services/recoveryPass";
-import { AxiosResponse } from "axios";
 
 export const RecoveryContext = createContext({});
 

@@ -21,10 +21,7 @@ function ThirdStep() {
 
   const { signIn } = useContext(AuthContext) as IAuthContext;
 
-  const onSubmit = async (data: {
-    newPassword: string;
-    confirmNewPassword: string;
-  }) => {
+  const onSubmit = async (data) => {
     const { newPassword, confirmNewPassword } = data;
 
     if (newPassword === confirmNewPassword) {
