@@ -17,5 +17,16 @@ export const loginValidation = yup.object({
     .string()
     .email("Insert a valid e-mail")
     .required("E-mail is required"),
-  password: yup.string().required("Please insert your password"),
+  password: yup.string().required("Insert your password"),
+});
+
+export const passwordValidation = yup.object({
+  newPassword: yup
+    .string()
+    .required("Insert your new password")
+    .min(6, "Minimum 6 characters"),
+  confirmNewPassword: yup
+    .string()
+    .required("Insert your new password")
+    .min(6, "Minimum 6 characters"),
 });
